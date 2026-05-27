@@ -2,7 +2,7 @@
 
 A community continuation of **Extensive Power Rework** for Project Zomboid Build 42.
 
-The original mod was created by **Hunter**, who publicly opened it for community forks when stepping back from PZ modding. This fork carries the work forward with a fix-only maintenance posture: drop-in compatibility patches when TIS ships engine updates, no feature creep unless the community asks for it.
+The original mod was created by **Hunter**, who publicly opened it for community forks when stepping back from PZ modding. This fork carries the work forward.
 
 ## What it does
 

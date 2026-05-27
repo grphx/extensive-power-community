@@ -1,5 +1,5 @@
 [h1]Extensive Power Rework (Community fork)[/h1]
-A community continuation of Hunter's [b]Extensive Power Rework[/b] for Project Zomboid Build 42. Hunter stepped back from PZ modding and publicly invited community forks; this is one of those forks, maintained as a fix-only continuation.
+A community continuation of Hunter's [b]Extensive Power Rework[/b] for Project Zomboid Build 42. Hunter stepped back from PZ modding and publicly invited community forks; this is one of those forks.
 
 [h1]What it does[/h1]
 Power and water infrastructure overhaul. Substations and water treatment facilities are real, repairable objects. Players restore utilities to entire zones by completing repair tasks at the right locations.
