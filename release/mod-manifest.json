@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SirDoggyJvla/SteamUploader-rs/refs/heads/main/manifest_schema/mod-manifest-schema.json",
+  "appid": 108600,
+  "workshopid": 3733603053,
+  "content": "./Contents",
+  "preview": "poster.gif",
+  "title": "Extensive Power Rework (Community fork)",
+  "description": "./WORKSHOP_DESCRIPTION.txt",
+  "visibility": 3,
+  "tags": [
+    "Build 42",
+    "Multiplayer",
+    "Server"
+  ]
+}

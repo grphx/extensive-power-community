@@ -1,0 +1,31 @@
+[h1]Extensive Power Rework (Community fork)[/h1]
+A community continuation of Hainrich's [b]Extensive Power Rework[/b] for Project Zomboid Build 42. Hainrich stepped back from PZ modding and publicly invited community forks; this is one of those forks, maintained as a fix-only continuation.
+
+[h1]What it does[/h1]
+Power and water infrastructure overhaul. Substations and water treatment facilities are real, repairable objects. Players restore utilities to entire zones by completing repair tasks at the right locations.
+
+[h1]What's in this fork[/h1]
+[list]
+[*]The full v1.0.4 codebase carried forward
+[*]B42.18 compatibility (sandbox JSON translations, current API)
+[*]No feature work in v0.1.0 - rebrand + maintenance baseline only
+[/list]
+
+[h1]Compatibility[/h1]
+[list]
+[*]Pure Lua, no Java patches
+[*]No item-script overrides - safe to remove without orphaning inventory
+[*]Uses ModData on world objects: removing mid-save reverts repaired zones to non-functional but does not corrupt the save
+[*]Server-friendly: drop into the Mods= line, restart
+[/list]
+
+[h1]Credits[/h1]
+Original concept, codebase, and the vast majority of the work: [b]Hainrich[/b], who opened the project for community forks when stepping back.
+
+This fork: [b]Grphx[/b]. Maintenance-only posture; if Hainrich returns to PZ modding, this fork will defer back.
+
+[h1]Mod info[/h1]
+[list]
+[*][b]Mod ID:[/b] EPR_Community
+[*][b]Workshop ID:[/b] 3733603053
+[/list]
