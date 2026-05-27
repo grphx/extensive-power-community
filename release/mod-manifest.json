@@ -6,7 +6,7 @@
   "preview": "poster.gif",
   "title": "Extensive Power Rework (Community fork)",
   "description": "./WORKSHOP_DESCRIPTION.txt",
-  "visibility": 3,
+  "visibility": 0,
   "tags": [
     "Build 42",
     "Multiplayer",
