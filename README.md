@@ -1,4 +1,4 @@
-# Extensive Power (Community)
+# Extensive Power Rework (Community fork)
 
 A community continuation of **Extensive Power Rework** for Project Zomboid Build 42.
 
@@ -19,7 +19,7 @@ Power and water infrastructure overhaul: substations and water treatment facilit
 
 - No item-script overrides (won't orphan inventory on uninstall).
 - Uses ModData on world objects. Removing mid-save = previously-repaired zones revert to non-functional but no save corruption.
-- Sandbox options grouped under "Extensive Power (Community)".
+- Sandbox options grouped under "Extensive Power Rework (Community fork)".
 
 ## Credits
 

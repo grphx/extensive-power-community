@@ -5,7 +5,8 @@
 - Forked from `EPR_B42_RB` v1.0.4 (community continuation of Hainrich's
   original `EPR_B42` v1.0.3). Includes the bug-fix delta accumulated in
   that intermediate fork.
-- Renamed: `EPR_B42_RB` -> `EPR_Community`.
+- Renamed: `EPR_B42_RB` -> `EPR_Community`. Display name: "Extensive
+  Power Rework (Community fork)" to preserve the original mod name.
 - Author changed to `Grphx` (Hainrich credited in README + Workshop
   description per their public invitation to community forks).
 - No code changes versus the baseline; this release is the rebrand +
