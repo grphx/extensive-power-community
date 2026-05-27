@@ -34,6 +34,9 @@ Everything below is [b]new[/b] in the Community fork on top of Hunter's original
 [h1]Credits[/h1]
 Original concept, codebase, and all of the work: [b]Hunter[/b], who opened the project for community forks when stepping back.
 
+[h1]Source[/h1]
+Source code is on GitHub: [url=https://github.com/grphx/extensive-power-community]github.com/grphx/extensive-power-community[/url]. Issues, suggestions, and pull requests welcome.
+
 [h1]Mod info[/h1]
 [list]
 [*][b]Mod ID:[/b] EPR_Community
