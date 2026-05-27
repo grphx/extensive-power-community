@@ -1,0 +1,8 @@
+name=Extensive Power (Community)
+id=EPR_Community
+author=Grphx
+description=Power and water infrastructure overhaul for Project Zomboid B42. Repair substations and water treatment facilities to restore utilities to zones. Community continuation of Extensive Power Rework by Hainrich, who opened the mod for community forks.
+poster=poster.png
+modversion=0.1.0
+pzversion=42
+versionMin=42.18

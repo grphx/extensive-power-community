@@ -1,0 +1,2 @@
+-- This file is intentionally empty.
+-- PZ B42 uses UI.json for translations, not .txt files.

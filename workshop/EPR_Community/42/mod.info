@@ -1,0 +1,8 @@
+name=Extensive Power (Community)
+id=EPR_Community
+author=Grphx
+description=B42 manifest. See parent mod.info for the canonical metadata.
+poster=poster.png
+modversion=0.1.0
+pzversion=42
+versionMin=42.18

@@ -1,0 +1,321 @@
+VERSION = 1,
+
+
+option EPR.RepairSpeedMultiplier
+{
+    type = double,
+    min = 0.25,
+    max = 4.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_RepairSpeedMultiplier,
+}
+
+option EPR.AssessmentTimeMinutes
+{
+    type = integer,
+    min = 5,
+    max = 120,
+    default = 30,
+    page = EPR,
+    translation = EPR_AssessmentTimeMinutes,
+}
+
+option EPR.PartReplacementTimeMinutes
+{
+    type = integer,
+    min = 60,
+    max = 960,
+    default = 360,
+    page = EPR,
+    translation = EPR_PartReplacementTimeMinutes,
+}
+
+option EPR.CalibrationTimeMinutes
+{
+    type = integer,
+    min = 15,
+    max = 240,
+    default = 90,
+    page = EPR,
+    translation = EPR_CalibrationTimeMinutes,
+}
+
+option EPR.StartupDefenseTimeMinutes
+{
+    type = integer,
+    min = 1,
+    max = 30,
+    default = 5,
+    page = EPR,
+    translation = EPR_StartupDefenseTimeMinutes,
+}
+
+
+option EPR.SkillRequirementMultiplier
+{
+    type = double,
+    min = 0.5,
+    max = 2.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_SkillRequirementMultiplier,
+}
+
+option EPR.MinElectricalSkill
+{
+    type = integer,
+    min = 1,
+    max = 10,
+    default = 7,
+    page = EPR,
+    translation = EPR_MinElectricalSkill,
+}
+
+option EPR.MinMetalworkSkill
+{
+    type = integer,
+    min = 1,
+    max = 10,
+    default = 4,
+    page = EPR,
+    translation = EPR_MinMetalworkSkill,
+}
+
+option EPR.FieldComponentCount
+{
+    type = integer,
+    min = 1,
+    max = 5,
+    default = 2,
+    page = EPR,
+    translation = EPR_FieldComponentCount,
+}
+
+option EPR.WaterPlantElectricalSkill
+{
+    type = integer,
+    min = 1,
+    max = 10,
+    default = 5,
+    page = EPR,
+    translation = EPR_WaterPlantElectricalSkill,
+}
+
+option EPR.WaterPlantMetalworkSkill
+{
+    type = integer,
+    min = 1,
+    max = 10,
+    default = 5,
+    page = EPR,
+    translation = EPR_WaterPlantMetalworkSkill,
+}
+
+
+option EPR.DegradationRate
+{
+    type = double,
+    min = 0.25,
+    max = 4.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_DegradationRate,
+}
+
+option EPR.RandomBreakdownEnabled
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_RandomBreakdownEnabled,
+}
+
+option EPR.BreakdownWarningEnabled
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_BreakdownWarningEnabled,
+}
+
+
+option EPR.ZombieAttractionEnabled
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_ZombieAttractionEnabled,
+}
+
+option EPR.ZombieAttractionMultiplier
+{
+    type = double,
+    min = 0.0,
+    max = 3.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_ZombieAttractionMultiplier,
+}
+
+option EPR.RepairNoiseRadius
+{
+    type = integer,
+    min = 25,
+    max = 200,
+    default = 100,
+    page = EPR,
+    translation = EPR_RepairNoiseRadius,
+}
+
+option EPR.StartupNoiseRadius
+{
+    type = integer,
+    min = 50,
+    max = 300,
+    default = 150,
+    page = EPR,
+    translation = EPR_StartupNoiseRadius,
+}
+
+
+option EPR.PartRequirementMultiplier
+{
+    type = double,
+    min = 0.5,
+    max = 8.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_PartRequirementMultiplier,
+}
+
+option EPR.MaintenancePartMultiplier
+{
+    type = double,
+    min = 0.5,
+    max = 8.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_MaintenancePartMultiplier,
+}
+
+option EPR.BuildingMaintenanceDays
+{
+    type = integer,
+    min = 1,
+    max = 90,
+    default = 14,
+    page = EPR,
+    translation = EPR_BuildingMaintenanceDays,
+}
+
+option EPR.RequireTools
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_RequireTools,
+}
+
+option EPR.ToolsConsumed
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_ToolsConsumed,
+}
+
+
+option EPR.GeneratorFuelConsumption
+{
+    type = double,
+    min = 0.25,
+    max = 4.0,
+    default = 1.0,
+    page = EPR,
+    translation = EPR_GeneratorFuelConsumption,
+}
+
+option EPR.GeneratorAutoConnect
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_GeneratorAutoConnect,
+}
+
+option EPR.SpriteGeneratorVirtualOnly
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_SpriteGeneratorVirtualOnly,
+}
+
+
+option EPR.WaterTankRequiresPower
+{
+    type = boolean,
+    default = false,
+    page = EPR,
+    translation = EPR_WaterTankRequiresPower,
+}
+
+option EPR.ManualPumpEnabled
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_ManualPumpEnabled,
+}
+
+
+option EPR.RequirePrerequisite
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_RequirePrerequisite,
+}
+
+option EPR.LouisvillePlantEnabled
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_LouisvillePlantEnabled,
+}
+
+
+option EPR.DebugMode
+{
+    type = boolean,
+    default = false,
+    page = EPR,
+    translation = EPR_DebugMode,
+}
+
+option EPR.ShowMapOverlay
+{
+    type = boolean,
+    default = false,
+    page = EPR,
+    translation = EPR_ShowMapOverlay,
+}
+
+option EPR.RequirePowerOff
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_RequirePowerOff,
+}
+
+option EPR.IBCompatMode
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_IBCompatMode,
+}
+
