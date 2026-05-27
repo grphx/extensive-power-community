@@ -2,7 +2,7 @@
 
 A community continuation of **Extensive Power Rework** for Project Zomboid Build 42.
 
-The original mod was authored by **Hainrich**, who publicly opened it for community forks when stepping back from PZ modding. This fork carries the work forward with a fix-only maintenance posture (Option A in the brainstorm): drop-in compatibility patches when TIS ships engine updates, no feature creep unless the community asks for it.
+The original mod was created by **Hunter**, who publicly opened it for community forks when stepping back from PZ modding. This fork carries the work forward with a fix-only maintenance posture: drop-in compatibility patches when TIS ships engine updates, no feature creep unless the community asks for it.
 
 ## What it does
 
@@ -10,7 +10,7 @@ Power and water infrastructure overhaul: substations and water treatment facilit
 
 ## Status
 
-- v0.1.0 baseline forked from `EPR_B42_RB` v1.0.4 (which itself was a community continuation of `EPR_B42` v1.0.3 by Hainrich).
+- v0.1.0 baseline forked from `EPR_B42_RB` v1.0.4 (which was a prior community continuation of Hunter's `EPR_B42` v1.0.3).
 - B42.18 compatible.
 - No Java patches.
 - Server-friendly: Lua + sandbox options only.
@@ -23,10 +23,8 @@ Power and water infrastructure overhaul: substations and water treatment facilit
 
 ## Credits
 
-Original concept, codebase, and the vast majority of the work: **Hainrich**.
-
-This fork: **Grphx**.
+Original concept, codebase, and all of the work: **Hunter**.
 
 ## License / intent
 
-Continuation under Hainrich's public invitation to community forks. If Hainrich returns to PZ modding, this fork will defer back.
+Continuation under Hunter's public invitation to community forks. If Hunter returns to PZ modding, this fork will defer back.

@@ -7,8 +7,9 @@
   that intermediate fork.
 - Renamed: `EPR_B42_RB` -> `EPR_Community`. Display name: "Extensive
   Power Rework (Community fork)" to preserve the original mod name.
-- Author changed to `Grphx` (Hainrich credited in README + Workshop
-  description per their public invitation to community forks).
+- mod.info `author=Hunter` (original creator). README and Workshop
+  description credit Hunter exclusively, per their public invitation
+  to community forks.
 - No code changes versus the baseline; this release is the rebrand +
   documentation pass that sets the project up for ongoing maintenance.
 - Lua + sandbox only; no Java patches.
