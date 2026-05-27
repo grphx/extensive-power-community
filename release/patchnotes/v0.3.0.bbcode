@@ -1,0 +1,22 @@
+[h1]v0.3.0 - Storm Blackouts + Debug Panel[/h1]
+
+[h2]New: Storm Blackouts[/h2]
+During thunderstorms, an online substation has a chance per 10-minute tick of being knocked offline by a lightning strike. The facility must be repaired through EPR's normal repair flow to restore power.
+
+Sandbox controls:
+[list]
+[*]Storm Blackouts - master toggle (default On)
+[*]Storm Blackout Chance (%) - 0..100, default 25
+[*]Require Thunder - if off, heavy rain also counts (default On)
+[/list]
+
+[h2]New: EPR Debug Panel (admin / SP / -debug)[/h2]
+Right-click world for an "EPR Debug" submenu (Director / BVD style). Opens a tabbed window:
+[list]
+[*][b]Zones[/b] - per-zone power and water on/off
+[*][b]Facilities[/b] - list every substation and water plant with Teleport, Flicker, Repair, Activate, Deactivate
+[*][b]World[/b] - global override toggle, noise burst, Force vanilla shutoff NOW, Lightning strike (random) / ALL online
+[/list]
+
+[h2]Note[/h2]
+Force vanilla shutoff is a testing-only button - it permanently poisons EPR's cached vanilla-shutoff values for the save so EPR's per-facility power gating becomes observable in early game. Not meant for normal play.

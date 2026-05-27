@@ -8,7 +8,19 @@ Power and water infrastructure overhaul. Substations and water treatment facilit
 [list]
 [*]The full v1.0.4 codebase carried forward
 [*]B42.18 compatibility (sandbox JSON translations, current API)
-[*]No feature work in v0.1.0 - rebrand + maintenance baseline only
+[/list]
+
+[h1]Additional Features (Community Fork additions)[/h1]
+Everything below is [b]new[/b] in the Community fork on top of Hunter's original. Original codebase and gameplay design remain Hunter's; this list tracks only what the fork adds.
+
+[b]Gameplay[/b]
+[list]
+[*][b]Storm Blackouts[/b] - during thunderstorms, online substations have a configurable chance per 10-minute tick of being knocked offline by a lightning strike, forcing repair through the normal EPR flow. Three sandbox options to tune frequency and whether thunder is required (vs heavy rain). Server-side, sandbox-gated.
+[/list]
+
+[b]Admin tooling[/b]
+[list]
+[*][b]EPR Debug Panel[/b] - admin / SP / -debug-only right-click submenu opens a tabbed window: Zones (per-zone power+water toggles), Facilities (Teleport, Flicker, Repair, Activate, Deactivate per substation + water plant), World (global override, noise burst, Force vanilla shutoff, Lightning strike random / ALL online). Mirrors the pattern of The Director and Better Vehicle Dynamics.
 [/list]
 
 [h1]Compatibility[/h1]
