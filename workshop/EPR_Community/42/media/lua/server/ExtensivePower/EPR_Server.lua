@@ -155,6 +155,21 @@ function EPR.Server.OnClientCommand(module, command, player, args)
     elseif command == "DebugDeactivate" then
         EPR.Server.HandleDebugDeactivate(player, args)
 
+    elseif command == "DebugFlicker" then
+        EPR.Server.HandleDebugFlicker(player, args)
+
+    elseif command == "DebugGlobalOverride" then
+        EPR.Server.HandleDebugGlobalOverride(player, args)
+
+    elseif command == "DebugNoiseBurst" then
+        EPR.Server.HandleDebugNoiseBurst(player, args)
+
+    elseif command == "DebugForceShutoff" then
+        EPR.Server.HandleDebugForceShutoff(player, args)
+
+    elseif command == "DebugLightningStrike" then
+        EPR.Server.HandleDebugLightningStrike(player, args)
+
     else
         logDebug("[EPR Server] Unknown command: " .. command)
     end
@@ -1431,6 +1446,208 @@ function EPR.Server.HandleDebugDeactivate(player, args)
     EPR.Server.BroadcastFacilityUpdate(facilityId, facility.type, state)
 
     logDebug("[EPR Server] DEBUG: Facility " .. facilityId .. " deactivated!")
+end
+
+-- ============================================
+-- DEBUG PANEL HANDLERS (admin-gated + EPR.DebugMode)
+-- ============================================
+
+local function debugPanelGate(player, label)
+    if not EPR.IsDebugMode or not EPR.IsDebugMode() then
+        print("[EPR Server] " .. label .. " rejected - debug mode not enabled")
+        return false
+    end
+    local lvl = player and player.getAccessLevel and player:getAccessLevel()
+    if not lvl or lvl == "" then
+        print("[EPR Server] " .. label .. " rejected - not admin: " .. (player and player:getUsername() or "?"))
+        return false
+    end
+    return true
+end
+
+function EPR.Server.HandleDebugFlicker(player, args)
+    if not debugPanelGate(player, "DebugFlicker") then return end
+    if not args or not args.facilityId then return end
+    EPR.Server.BroadcastFacilityStartupFlicker(args.facilityId)
+    logDebug("[EPR Server] DEBUG: Flicker broadcast for " .. tostring(args.facilityId))
+end
+
+function EPR.Server.HandleDebugGlobalOverride(player, args)
+    if not debugPanelGate(player, "DebugGlobalOverride") then return end
+    if not args then return end
+    local enabled = args.enabled == true
+    if EPR.PowerController then
+        EPR.PowerController.globalOverride = enabled
+    end
+    EPR.SaveData()
+    EPR.Server.BroadcastGlobalOverrideChange(enabled)
+    logDebug("[EPR Server] DEBUG: Global override -> " .. tostring(enabled))
+end
+
+function EPR.Server.HandleDebugForceShutoff(player, args)
+    if not debugPanelGate(player, "DebugForceShutoff") then return end
+    -- Force vanilla PZ grid to shut off immediately and KEEP it shut off.
+    -- EPR keeps the vanilla grid alive (ElecShutModifier=45000) whenever ANY
+    -- facility OR sprite generator is online -- so first deactivate everything,
+    -- then poison EPR's restore cache and set the modifier to -1.
+
+    -- 1. Deactivate every substation and water plant.
+    for fid, st in pairs(EPR.Substations or {}) do
+        if st then st.status = "offline"; st.health = 0 end
+    end
+    for fid, st in pairs(EPR.WaterPlants or {}) do
+        if st then st.status = "offline"; st.health = 0 end
+    end
+    -- 2. Turn off every sprite generator.
+    for fid, sg in pairs(EPR.SpriteGenerators or {}) do
+        if sg then sg.active = false; sg.running = false end
+    end
+    -- 3. Clear every zone-power and zone-water flag.
+    for k, _ in pairs(EPR.PoweredZones or {}) do EPR.PoweredZones[k] = false end
+    for k, _ in pairs(EPR.WaterZones or {})  do EPR.WaterZones[k]  = false end
+    local opts = getSandboxOptions and getSandboxOptions()
+    if not opts then
+        print("[EPR Server] DebugForceShutoff: sandbox unavailable")
+        return
+    end
+    local function setIfExists(name, value)
+        local opt = opts.getOptionByName and opts:getOptionByName(name)
+        if opt and opt.setValue then pcall(function() opt:setValue(value) end) end
+    end
+    setIfExists("ElecShutModifier", -1)
+    setIfExists("WaterShutModifier", -1)
+    if opts.toLua then pcall(function() opts:toLua() end) end
+    -- Poison ALL THREE of EPR's restore caches. The ModData copy is the deepest
+    -- and most often missed -- it persists across save/load.
+    if EPR.PowerController then
+        EPR.PowerController.originalElecShutModifier = -1
+        EPR.PowerController.originalWaterShutModifier = -1
+    end
+    if ModData and ModData.getOrCreate then
+        local md = ModData.getOrCreate("EPR_GlobalData")
+        if md then
+            md.originalElecShut = -1
+            md.originalWaterShut = -1
+        end
+    end
+    -- Also explicitly disable EPR's global override so it doesn't push the
+    -- modifier back to 45000 (which keeps the vanilla grid alive).
+    if EPR.PowerController and EPR.PowerController.DisableGlobalOverride then
+        pcall(EPR.PowerController.DisableGlobalOverride)
+    end
+    -- Reapply -1 AFTER any disable path, in case the disable touched it.
+    setIfExists("ElecShutModifier", -1)
+    setIfExists("WaterShutModifier", -1)
+    -- Clear EPR's "Louisville grace period" stickies. EPR has a 12-hour delay
+    -- after Louisville goes offline where it still treats the plant as online
+    -- (LouisvilleOfflineDelayHours). Without clearing this, UpdateGlobalOverride
+    -- keeps re-enabling override and bringing the vanilla grid back up.
+    if EPR.PowerController then
+        EPR.PowerController.louisvilleEverOnline = false
+        EPR.PowerController.louisvilleOfflineSinceHours = nil
+    end
+    if ModData and ModData.getOrCreate then
+        local md = ModData.getOrCreate("EPR_GlobalData")
+        if md then
+            md.louisvilleEverOnline = false
+            md.louisvilleOfflineSinceHours = nil
+        end
+    end
+    -- Broadcast so all clients see the override change.
+    if EPR.Server.BroadcastGlobalOverrideChange then
+        EPR.Server.BroadcastGlobalOverrideChange(false)
+    end
+    print("[EPR Server] DEBUG: vanilla grid shut off (caches poisoned + Louisville grace period cleared)")
+end
+
+local function strikeFacility(fid, state)
+    if EPR.Maintenance and EPR.Maintenance.TriggerBreakdown then
+        EPR.Maintenance.TriggerBreakdown(fid, state, "power")
+    else
+        state.status = "offline"; state.health = 0
+    end
+    -- Drop the zones this facility was powering so the lights actually go out.
+    -- Without this, PoweredZones[zone] stays true and EPR's per-zone overlay
+    -- keeps the lights on even though the substation is broken.
+    local facility = EPR.Zones and EPR.Zones.GetFacility and EPR.Zones.GetFacility(fid)
+    if facility and facility.powersZones then
+        for _, zoneName in ipairs(facility.powersZones) do
+            EPR.PoweredZones[zoneName] = false
+            if EPR.Buildings and EPR.Buildings.ApplyZonePower then
+                EPR.Buildings.ApplyZonePower(zoneName, false)
+            end
+            if EPR.Server.BroadcastZonePowerChange then
+                EPR.Server.BroadcastZonePowerChange(zoneName, false)
+            end
+        end
+    end
+    if EPR.PowerController and EPR.PowerController.UpdateNetworks then
+        EPR.PowerController.UpdateNetworks()
+    end
+    if EPR.SaveData then EPR.SaveData() end
+    if EPR.Server.BroadcastFacilityUpdate then
+        EPR.Server.BroadcastFacilityUpdate(fid, "power", state)
+    end
+    -- NB: do NOT call BroadcastFacilityStartupFlicker here. That triggers IB's
+    -- StartFlicker which is the power-restoration flicker effect and ends with
+    -- power back on -- precisely the opposite of what a lightning strike wants.
+    local facName = fid
+    if EPR.Zones and EPR.Zones.GetFacility then
+        local f = EPR.Zones.GetFacility(fid)
+        if f and f.name then facName = f.name end
+    end
+    print("[EPR Server] DEBUG: forced lightning strike on " .. facName .. " (" .. fid .. ")")
+    local players = getOnlinePlayers and getOnlinePlayers()
+    if players then
+        for i = 0, players:size() - 1 do
+            local p = players:get(i)
+            if p and p.Say then pcall(function() p:Say("[DEBUG] Lightning strikes " .. facName .. "!") end) end
+        end
+    end
+end
+
+function EPR.Server.HandleDebugLightningStrike(player, args)
+    if not debugPanelGate(player, "DebugLightningStrike") then return end
+    if not EPR.Substations then return end
+    local online = {}
+    for fid, st in pairs(EPR.Substations) do
+        if st and st.status == "online" then table.insert(online, { fid = fid, state = st }) end
+    end
+    if #online == 0 then
+        print("[EPR Server] DEBUG: Lightning strike requested but no online substation to target")
+        if player and player.Say then pcall(function() player:Say("No online substation to strike. Activate one first.") end) end
+        return
+    end
+    if args and args.all == true then
+        for _, e in ipairs(online) do
+            strikeFacility(e.fid, e.state)
+        end
+    else
+        local e = online[ZombRand(#online) + 1]
+        strikeFacility(e.fid, e.state)
+    end
+end
+
+function EPR.Server.HandleDebugNoiseBurst(player, args)
+    if not debugPanelGate(player, "DebugNoiseBurst") then return end
+    if not args or not args.x or not args.y then return end
+    local x = math.floor(tonumber(args.x) or 0)
+    local y = math.floor(tonumber(args.y) or 0)
+    local z = math.floor(tonumber(args.z) or 0)
+    local radius = math.floor(tonumber(args.radius) or 30)
+    local volume = math.floor(tonumber(args.volume) or 100)
+    if radius < 1 then radius = 1 end
+    if radius > 200 then radius = 200 end
+    if volume < 1 then volume = 1 end
+    if volume > 200 then volume = 200 end
+    local world = getWorld and getWorld()
+    local mgr = world and world.getWorldSoundManager and world:getWorldSoundManager()
+    if mgr and mgr.addSound then
+        pcall(function() mgr:addSound(player, x, y, z, radius, volume) end)
+        logDebug("[EPR Server] DEBUG: Noise burst at " .. x .. "," .. y .. "," .. z .. " r=" .. radius .. " v=" .. volume)
+    else
+        print("[EPR Server] DebugNoiseBurst: WorldSoundManager unavailable")
+    end
 end
 
 -- ============================================

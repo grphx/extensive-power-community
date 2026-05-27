@@ -319,3 +319,29 @@ option EPR.IBCompatMode
     translation = EPR_IBCompatMode,
 }
 
+option EPR.StormBlackoutsEnabled
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_StormBlackoutsEnabled,
+}
+
+option EPR.StormBlackoutChancePerCheck
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 25,
+    page = EPR,
+    translation = EPR_StormBlackoutChancePerCheck,
+}
+
+option EPR.StormBlackoutRequireThunder
+{
+    type = boolean,
+    default = true,
+    page = EPR,
+    translation = EPR_StormBlackoutRequireThunder,
+}
+

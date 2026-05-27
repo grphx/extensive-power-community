@@ -67,5 +67,11 @@
     "Sandbox_EPR_ZombieAttractionEnabled": "Zombie Attraction",
     "Sandbox_EPR_ZombieAttractionEnabled_tooltip": "Repairs and startup attract nearby zombies. Default: On",
     "Sandbox_EPR_ZombieAttractionMultiplier": "Zombie Attraction Multiplier",
-    "Sandbox_EPR_ZombieAttractionMultiplier_tooltip": "How many zombies are attracted. Higher = more zombies. Default: 1.0"
+    "Sandbox_EPR_ZombieAttractionMultiplier_tooltip": "How many zombies are attracted. Higher = more zombies. Default: 1.0",
+    "Sandbox_EPR_StormBlackoutsEnabled": "Storm Blackouts",
+    "Sandbox_EPR_StormBlackoutsEnabled_tooltip": "During thunderstorms, an online substation has a chance per 10-minute tick of being knocked offline (lightning strike). Player must repair it. Default: On",
+    "Sandbox_EPR_StormBlackoutChancePerCheck": "Storm Blackout Chance (%)",
+    "Sandbox_EPR_StormBlackoutChancePerCheck_tooltip": "Chance per 10-minute storm tick that a random online substation gets knocked offline. 0 disables. Default: 25",
+    "Sandbox_EPR_StormBlackoutRequireThunder": "Require Thunder",
+    "Sandbox_EPR_StormBlackoutRequireThunder_tooltip": "If on, blackouts only trigger during actual thunderstorms. If off, heavy rain also counts. Default: On"
 }
