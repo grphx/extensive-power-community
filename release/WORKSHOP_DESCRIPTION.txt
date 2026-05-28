@@ -4,6 +4,20 @@ A community continuation of Hunter's [b]Extensive Power Rework[/b] for Project Z
 [h1]What it does[/h1]
 Power and water infrastructure overhaul. Substations and water treatment facilities are real, repairable objects. Players restore utilities to entire zones by completing repair tasks at the right locations.
 
+[h1]Stations[/h1]
+The mod ships with 6 facilities scattered across Knox County. Each one must be repaired to restore power or water to its zones. Louisville Power Plant is the master prerequisite - bring it online before any other substation can carry power downstream.
+
+[img]https://images.steamusercontent.com/ugc/14693638736096731466/F7D2E9005BB093EDD2D55E57723C025B98D339A5/[/img]
+
+[list]
+[*][b]Louisville Power Plant[/b] (12120, 1617) - powers Louisville. Prereq for the whole grid.
+[*][b]Louisville South Substation[/b] (14732, 4083) - powers West Point, Valley Station, Louisville Airport.
+[*][b]Muldraugh Substation[/b] (10389, 10060) - powers Muldraugh, Rosewood, March Ridge, Fallas Lake.
+[*][b]Riverside Relay[/b] (4832, 6279) - powers Riverside.
+[*][b]Irvington Substation[/b] (2210, 13914) - powers Irvington, Echo Creek, Ekron, Brandenburg.
+[*][b]Rosewood Water Treatment[/b] (8044, 15360) - waters every zone.
+[/list]
+
 [h1]What's in this fork[/h1]
 [list]
 [*]The full v1.0.4 codebase carried forward
