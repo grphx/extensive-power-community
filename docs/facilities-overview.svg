@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 951" font-family="-apple-system, system-ui, sans-serif">
+  <defs>
+    <style>
+      .bg{fill:#1d2330}
+      .axis{stroke:#2a3142;stroke-width:1}
+      .axis-label{fill:#5a6478;font-size:10px}
+      .title{fill:#e8eaf0;font-size:20px;font-weight:600}
+      .subtitle{fill:#8a92a5;font-size:11px}
+      .pow{fill:#f5c542;stroke:#1d2330;stroke-width:2}
+      .pow-prereq{fill:#ff7b3a;stroke:#1d2330;stroke-width:2}
+      .wat{fill:#4aa8ff;stroke:#1d2330;stroke-width:2}
+      .name{fill:#e8eaf0;font-size:12px;font-weight:600}
+      .id{fill:#8a92a5;font-size:10px}
+      .zone{fill:#6f7588;font-size:9px;font-style:italic}
+      .link{stroke:#3a4359;stroke-width:1;stroke-dasharray:3,3;fill:none;opacity:0.55}
+      .legend-box{fill:#262d3d;stroke:#3a4359}
+    </style>
+  </defs>
+  <rect class="bg" width="900" height="951"/>
+  <text class="title" x="80" y="38">EPR Community - Facility Map</text>
+  <text class="subtitle" x="80" y="55">Knox County, PZ B42. Coords are world tiles. Orange = prerequisite plant.</text>
+  <line class="axis" x1="122" y1="80" x2="122" y2="871"/>
+  <text class="axis-label" x="122" y="885" text-anchor="middle">1000</text>
+  <line class="axis" x1="165" y1="80" x2="165" y2="871"/>
+  <text class="axis-label" x="165" y="885" text-anchor="middle">2000</text>
+  <line class="axis" x1="207" y1="80" x2="207" y2="871"/>
+  <text class="axis-label" x="207" y="885" text-anchor="middle">3000</text>
+  <line class="axis" x1="249" y1="80" x2="249" y2="871"/>
+  <text class="axis-label" x="249" y="885" text-anchor="middle">4000</text>
+  <line class="axis" x1="291" y1="80" x2="291" y2="871"/>
+  <text class="axis-label" x="291" y="885" text-anchor="middle">5000</text>
+  <line class="axis" x1="334" y1="80" x2="334" y2="871"/>
+  <text class="axis-label" x="334" y="885" text-anchor="middle">6000</text>
+  <line class="axis" x1="376" y1="80" x2="376" y2="871"/>
+  <text class="axis-label" x="376" y="885" text-anchor="middle">7000</text>
+  <line class="axis" x1="418" y1="80" x2="418" y2="871"/>
+  <text class="axis-label" x="418" y="885" text-anchor="middle">8000</text>
+  <line class="axis" x1="461" y1="80" x2="461" y2="871"/>
+  <text class="axis-label" x="461" y="885" text-anchor="middle">9000</text>
+  <line class="axis" x1="503" y1="80" x2="503" y2="871"/>
+  <text class="axis-label" x="503" y="885" text-anchor="middle">10000</text>
+  <line class="axis" x1="545" y1="80" x2="545" y2="871"/>
+  <text class="axis-label" x="545" y="885" text-anchor="middle">11000</text>
+  <line class="axis" x1="587" y1="80" x2="587" y2="871"/>
+  <text class="axis-label" x="587" y="885" text-anchor="middle">12000</text>
+  <line class="axis" x1="630" y1="80" x2="630" y2="871"/>
+  <text class="axis-label" x="630" y="885" text-anchor="middle">13000</text>
+  <line class="axis" x1="672" y1="80" x2="672" y2="871"/>
+  <text class="axis-label" x="672" y="885" text-anchor="middle">14000</text>
+  <line class="axis" x1="714" y1="80" x2="714" y2="871"/>
+  <text class="axis-label" x="714" y="885" text-anchor="middle">15000</text>
+  <line class="axis" x1="757" y1="80" x2="757" y2="871"/>
+  <text class="axis-label" x="757" y="885" text-anchor="middle">16000</text>
+  <line class="axis" x1="799" y1="80" x2="799" y2="871"/>
+  <text class="axis-label" x="799" y="885" text-anchor="middle">17000</text>
+  <line class="axis" x1="80" y1="123" x2="820" y2="123"/>
+  <text class="axis-label" x="74" y="126" text-anchor="end">1000</text>
+  <line class="axis" x1="80" y1="166" x2="820" y2="166"/>
+  <text class="axis-label" x="74" y="169" text-anchor="end">2000</text>
+  <line class="axis" x1="80" y1="208" x2="820" y2="208"/>
+  <text class="axis-label" x="74" y="211" text-anchor="end">3000</text>
+  <line class="axis" x1="80" y1="251" x2="820" y2="251"/>
+  <text class="axis-label" x="74" y="254" text-anchor="end">4000</text>
+  <line class="axis" x1="80" y1="294" x2="820" y2="294"/>
+  <text class="axis-label" x="74" y="297" text-anchor="end">5000</text>
+  <line class="axis" x1="80" y1="337" x2="820" y2="337"/>
+  <text class="axis-label" x="74" y="340" text-anchor="end">6000</text>
+  <line class="axis" x1="80" y1="379" x2="820" y2="379"/>
+  <text class="axis-label" x="74" y="382" text-anchor="end">7000</text>
+  <line class="axis" x1="80" y1="422" x2="820" y2="422"/>
+  <text class="axis-label" x="74" y="425" text-anchor="end">8000</text>
+  <line class="axis" x1="80" y1="465" x2="820" y2="465"/>
+  <text class="axis-label" x="74" y="468" text-anchor="end">9000</text>
+  <line class="axis" x1="80" y1="508" x2="820" y2="508"/>
+  <text class="axis-label" x="74" y="511" text-anchor="end">10000</text>
+  <line class="axis" x1="80" y1="550" x2="820" y2="550"/>
+  <text class="axis-label" x="74" y="553" text-anchor="end">11000</text>
+  <line class="axis" x1="80" y1="593" x2="820" y2="593"/>
+  <text class="axis-label" x="74" y="596" text-anchor="end">12000</text>
+  <line class="axis" x1="80" y1="636" x2="820" y2="636"/>
+  <text class="axis-label" x="74" y="639" text-anchor="end">13000</text>
+  <line class="axis" x1="80" y1="679" x2="820" y2="679"/>
+  <text class="axis-label" x="74" y="682" text-anchor="end">14000</text>
+  <line class="axis" x1="80" y1="721" x2="820" y2="721"/>
+  <text class="axis-label" x="74" y="724" text-anchor="end">15000</text>
+  <line class="axis" x1="80" y1="764" x2="820" y2="764"/>
+  <text class="axis-label" x="74" y="767" text-anchor="end">16000</text>
+  <line class="axis" x1="80" y1="807" x2="820" y2="807"/>
+  <text class="axis-label" x="74" y="810" text-anchor="end">17000</text>
+  <line class="axis" x1="80" y1="850" x2="820" y2="850"/>
+  <text class="axis-label" x="74" y="853" text-anchor="end">18000</text>
+  <line class="link" x1="593" y1="149" x2="609" y2="174"/>
+  <line class="link" x1="703" y1="255" x2="672" y2="242"/>
+  <line class="link" x1="703" y1="255" x2="706" y2="268"/>
+  <line class="link" x1="703" y1="255" x2="672" y2="302"/>
+  <line class="link" x1="519" y1="510" x2="537" y2="529"/>
+  <line class="link" x1="519" y1="510" x2="427" y2="585"/>
+  <line class="link" x1="519" y1="510" x2="524" y2="602"/>
+  <line class="link" x1="519" y1="510" x2="600" y2="542"/>
+  <line class="link" x1="284" y1="348" x2="308" y2="358"/>
+  <line class="link" x1="173" y1="675" x2="181" y2="691"/>
+  <line class="link" x1="173" y1="675" x2="241" y2="679"/>
+  <line class="link" x1="173" y1="675" x2="181" y2="734"/>
+  <line class="link" x1="173" y1="675" x2="258" y2="734"/>
+  <text class="zone" x="609" y="174" text-anchor="middle">Louisville</text>
+  <text class="zone" x="672" y="242" text-anchor="middle">WestPoint</text>
+  <text class="zone" x="706" y="268" text-anchor="middle">ValleyStation</text>
+  <text class="zone" x="672" y="302" text-anchor="middle">LouisvilleAirport</text>
+  <text class="zone" x="308" y="358" text-anchor="middle">Riverside</text>
+  <text class="zone" x="537" y="529" text-anchor="middle">Muldraugh</text>
+  <text class="zone" x="427" y="585" text-anchor="middle">Rosewood</text>
+  <text class="zone" x="524" y="602" text-anchor="middle">MarchRidge</text>
+  <text class="zone" x="600" y="542" text-anchor="middle">FallasLake</text>
+  <text class="zone" x="181" y="691" text-anchor="middle">Irvington</text>
+  <text class="zone" x="241" y="679" text-anchor="middle">EchoCreek</text>
+  <text class="zone" x="181" y="734" text-anchor="middle">Ekron</text>
+  <text class="zone" x="258" y="734" text-anchor="middle">Brandenburg</text>
+  <circle class="pow-prereq" cx="593" cy="149" r="9"/>
+  <text class="name" x="593" y="133" text-anchor="middle">Louisville Power Plant</text>
+  <text class="id" x="593" y="145" text-anchor="middle">12120, 1617</text>
+  <circle class="pow" cx="703" cy="255" r="9"/>
+  <text class="name" x="703" y="239" text-anchor="middle">Louisville South Sub.</text>
+  <text class="id" x="703" y="251" text-anchor="middle">14732, 4083</text>
+  <circle class="pow" cx="519" cy="510" r="9"/>
+  <text class="name" x="519" y="494" text-anchor="middle">Muldraugh Sub.</text>
+  <text class="id" x="519" y="506" text-anchor="middle">10389, 10060</text>
+  <circle class="pow" cx="284" cy="348" r="9"/>
+  <text class="name" x="284" y="332" text-anchor="middle">Riverside Relay</text>
+  <text class="id" x="284" y="344" text-anchor="middle">4832, 6279</text>
+  <circle class="pow" cx="173" cy="675" r="9"/>
+  <text class="name" x="173" y="659" text-anchor="middle">Irvington Sub.</text>
+  <text class="id" x="173" y="671" text-anchor="middle">2210, 13914</text>
+  <circle class="wat" cx="420" cy="737" r="9"/>
+  <text class="name" x="420" y="721" text-anchor="middle">Rosewood Water Treatment</text>
+  <text class="id" x="420" y="733" text-anchor="middle">8044, 15360</text>
+  <rect class="legend-box" x="660" y="841" width="220" height="90" rx="6"/>
+  <circle class="pow-prereq" cx="678" cy="863" r="7"/>
+  <text class="name" x="694" y="867">Power plant (prereq)</text>
+  <circle class="pow" cx="678" cy="885" r="7"/>
+  <text class="name" x="694" y="889">Power substation</text>
+  <circle class="wat" cx="678" cy="907" r="7"/>
+  <text class="name" x="694" y="911">Water treatment</text>
+</svg>
