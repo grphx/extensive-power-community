@@ -1,11 +1,22 @@
 # Facility Map
 
-The mod ships with **6 facilities** scattered across Knox County. Each one
-must be repaired (or activated via the [Debug Panel](../README.md)) to
-restore power or water to its zones.
+![Facility map overlaid on PZ B42 worldmap](./facilities-real-map.jpg)
 
-Coordinates are PZ world tiles. Click any facility name to open it on the
-official [map.projectzomboid.com](https://map.projectzomboid.com) viewer.
+The mod ships with **6 facilities** scattered across Knox County. Each one
+must be repaired (or activated via the in-game EPR Debug Panel) to restore
+power or water to its zones.
+
+The image above is the PZ B42 vanilla worldmap (`media/maps/Muldraugh, KY/worldmap.png`,
+property of The Indie Stone) with the 6 facility positions overlaid.
+Regenerate with `python3 scripts/render_facility_map.py` (requires Pillow
+and a local PZ install).
+
+A schematic-only version (no PZ assets) is at
+[facilities-overview.svg](./facilities-overview.svg).
+
+Coordinates below are PZ world tiles. Click any facility name to open it
+on the official [map.projectzomboid.com](https://map.projectzomboid.com)
+viewer.
 
 ## Power facilities
 
