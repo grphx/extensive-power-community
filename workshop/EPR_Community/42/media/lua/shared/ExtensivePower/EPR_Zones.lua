@@ -713,23 +713,14 @@ function EPR.Zones.UpdateZoneStatus()
         louisvilleOnline = true
     end
 
-    if not louisvilleOnline then
-        for zoneName, _ in pairs(EPR.Zones.Definitions) do
-            EPR.PoweredZones[zoneName] = false
-            EPR.WaterZones[zoneName] = false
-        end
-
-        if EPR.Buildings and EPR.Buildings.ApplyAllZones then
-            EPR.Buildings.ApplyAllZones()
-        end
-
-        if EPR.Buildings and EPR.Buildings.ApplySimulationForAllZones then
-            EPR.Buildings.ApplySimulationForAllZones()
-        end
-        return
-    end
-
-    -- Reset all zones
+    -- BUGFIX (v0.4.0): Louisville Power Plant is a POWER prerequisite, not a
+    -- water one. The Rosewood Water Treatment Plant runs independently of
+    -- Louisville. The previous code zeroed WaterZones AND returned early when
+    -- Louisville was offline, which killed water for every zone on day 0 the
+    -- moment UpdateZoneStatus first ran with globalOverride still false (the
+    -- "water dies after day 1" reports). Now we always reset both sets and
+    -- then drive them from the per-facility pass below; the louisvilleOnline
+    -- gate only suppresses power output.
     for zoneName, _ in pairs(EPR.Zones.Definitions) do
         EPR.PoweredZones[zoneName] = false
         EPR.WaterZones[zoneName] = false
@@ -748,11 +739,15 @@ function EPR.Zones.UpdateZoneStatus()
         end
 
         if status and status.status == "online" then
-            if facility.powersZones then
+            -- POWER zones honour the Louisville prereq (a substation can be
+            -- online but its zones stay dark until Louisville Plant is up).
+            if louisvilleOnline and facility.powersZones then
                 for _, zoneName in ipairs(facility.powersZones) do
                     EPR.PoweredZones[zoneName] = true
                 end
             end
+            -- WATER zones are NOT gated by Louisville Power Plant - water is
+            -- treated by Rosewood Water Treatment Plant on its own grid.
             if facility.watersZones then
                 for _, zoneName in ipairs(facility.watersZones) do
                     EPR.WaterZones[zoneName] = true

@@ -1,0 +1,11 @@
+[h1]v0.4.0 - Water-shutoff bugfix + indestructible-after-repair option[/h1]
+
+[h2]Bug fix: water no longer cuts after day 1[/h2]
+The mod's [b]UpdateZoneStatus[/b] routine was conflating water-zone state with the Louisville Power Plant prereq. When Louisville (the [i]power[/i] prereq) was offline - which is its default state until the player repairs it - the routine cleared every water zone too, killing in-world water on day 0 the moment the first periodic check ran.
+
+Now water zones are driven only by the Rosewood Water Treatment Plant. Power zones still respect the Louisville prereq; water is fully decoupled.
+
+[h2]New: indestructible-after-repair mode[/h2]
+The [b]Degradation Rate[/b] sandbox option's minimum is now [b]0[/b] (was 0.25). Set it to 0 to fully disable facility wear after repair: once a station is online, it stays healthy indefinitely. Combine with [b]Random Breakdowns: Off[/b] for a true fix-it-and-forget-it experience.
+
+[b]Lua + sandbox change.[/b] No mod-load changes; pull the new version and continue an existing save.

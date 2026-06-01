@@ -22,6 +22,25 @@ authorship remains Hunter's; this list tracks only what the fork adds.
 
 ---
 
+## [0.4.0] - 2026-05-29 - Water-shutoff bugfix + indestructible-after-repair option
+
+Bug fixes:
+- **Water no longer cuts after day 1.** `UpdateZoneStatus()` in `EPR_Zones.lua`
+  was conflating water-zone state with Louisville Power Plant status: when
+  Louisville (the *power* prereq) was offline (its default state pre-repair),
+  the function early-returned after setting `WaterZones[*] = false` for every
+  zone. This killed water in-world on day 0 the moment the first periodic
+  `UpdateZoneStatus` ran. Now the water side is driven only by water-facility
+  status (Rosewood Water Treatment Plant), unaffected by Louisville Plant.
+- Power zones still honour the Louisville Plant prereq; only water is
+  decoupled.
+
+New config:
+- **`DegradationRate` minimum is now 0** (was 0.25). Set to 0 to fully disable
+  facility wear after repair - repaired stations stay healthy indefinitely.
+  Combined with `RandomBreakdownEnabled = false`, gives a fully
+  "fix-it-and-forget-it" mode.
+
 ## [0.3.0] - 2026-05-27 - Storm Blackouts + Debug Panel
 
 New features:

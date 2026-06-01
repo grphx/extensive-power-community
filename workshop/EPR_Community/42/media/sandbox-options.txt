@@ -116,7 +116,7 @@ option EPR.WaterPlantMetalworkSkill
 option EPR.DegradationRate
 {
     type = double,
-    min = 0.25,
+    min = 0,
     max = 4.0,
     default = 1.0,
     page = EPR,
