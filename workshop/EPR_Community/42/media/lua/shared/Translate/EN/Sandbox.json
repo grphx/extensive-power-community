@@ -52,6 +52,8 @@
     "Sandbox_EPR_SkillRequirementMultiplier_tooltip": "Multiplies all skill requirements. Lower = easier. Default: 1.0",
     "Sandbox_EPR_SpriteGeneratorVirtualOnly": "Sprite Generators: Virtual Only",
     "Sandbox_EPR_SpriteGeneratorVirtualOnly_tooltip": "Use virtual power only (no physical generator object). Turn off for legacy generator behavior. Default: On",
+    "Sandbox_EPR_EnableSpriteGenerators": "Sprite Generators: Power the grid",
+    "Sandbox_EPR_EnableSpriteGenerators_tooltip": "When ON, activating one of the four map-placed industrial generator sprites (industry_02_52, _53, _67, _71) is treated as an alternate EPR power source and will restore power to the entire KY grid (same behaviour as repairing Louisville Plant). When OFF (default), those sprites have no grid effect - only repairing Louisville Plant can restore the grid. This does NOT affect vanilla portable generators in any way; they continue to power buildings via wires exactly as PZ ships them. Default: Off (sprite generators do NOT power the grid).",
     "Sandbox_EPR_StartupDefenseTimeMinutes": "Startup Defense Time (minutes)",
     "Sandbox_EPR_StartupDefenseTimeMinutes_tooltip": "Time you must defend the facility during startup. Default: 5 minutes",
     "Sandbox_EPR_StartupNoiseRadius": "Startup Noise Radius",

@@ -1,0 +1,23 @@
+[h1]v0.4.1 - Sprite-generator grid-power opt-in[/h1]
+
+Workshop reports flagged: "the entire KY power grid gets power the moment any building has EPR power." The cause: EPR was treating the four immovable industrial-site generator sprites ([i]industry_02_52[/i], [i]_53[/i], [i]_67[/i], [i]_71[/i]) as alternate EPR power sources. Activating any of them flipped the global grid override and powered the whole map - making substation repair and the Louisville Plant chain pointless.
+
+[h2]The workaround[/h2]
+
+New sandbox option [b]EPR.EnableSpriteGenerators[/b] on the EPR page, [b]default OFF[/b]. When off, the four industrial-site sprites no longer power the EPR grid. The only way to restore power to the KY map is to repair the Louisville Plant via the substation chain, as originally intended.
+
+When on, behaviour matches v0.4.0 - server admins who prefer the old behaviour can opt back in.
+
+[h2]Vanilla generators are NOT affected[/h2]
+
+This option ONLY controls EPR's sprite-source grid-override path. [b]Vanilla portable generators[/b] (the moveable item you find / craft / place down and connect to wires) continue to power buildings via wires [b]exactly as PZ ships them[/b]. The vanilla generator path is in a separate code path that EPR doesn't touch at all.
+
+[h2]On the bigger architectural fix[/h2]
+
+The reported "ANY building with EPR power lights up the whole grid" issue is a separate architectural problem: EPR's grid-restoration system operates on the GLOBAL [i]SandboxVars.ElecShutModifier[/i] rather than per-building, and fixing it properly likely requires a Java-side override of [i]IsoObject.isPowered[/i]. That work is queued for v0.5. This v0.4.1 ships the workaround the community asked for to stop the easy abuse path immediately.
+
+[h2]Single-player and server admins[/h2]
+
+Workshop subscribers: just update. Default behaviour is the new (correct) one - no sandbox change needed.
+
+Server admins who want the old "any sprite generator restores the grid" behaviour: toggle [b]Sprite Generators: Power the grid[/b] ON in the EPR sandbox page.

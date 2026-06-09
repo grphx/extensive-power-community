@@ -431,6 +431,17 @@ function EPR.PowerController.IsAnyFacilityOnline()
 end
 
 function EPR.PowerController.IsAnySpriteGeneratorActive()
+    -- v0.4.1: sprite generators are gated behind a sandbox opt-in.
+    -- Default OFF. When OFF, activating one of the four hardcoded
+    -- industrial-generator sprites no longer flips EPR's global power
+    -- override (which had been letting a single sprite restore the
+    -- whole KY grid - the reported user-feedback bug). Vanilla portable
+    -- generators are untouched; this only gates EPR's sprite-source
+    -- path. See sandbox option EPR.EnableSpriteGenerators.
+    if SandboxVars and SandboxVars.EPR
+            and SandboxVars.EPR.EnableSpriteGenerators ~= true then
+        return false
+    end
     if not EPR.SpriteGenerators then return false end
     for _, record in pairs(EPR.SpriteGenerators) do
         if record and EPR.Buildings and EPR.Buildings.IsSpriteGeneratorActive then

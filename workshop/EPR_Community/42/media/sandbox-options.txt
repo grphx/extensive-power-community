@@ -252,6 +252,14 @@ option EPR.SpriteGeneratorVirtualOnly
     translation = EPR_SpriteGeneratorVirtualOnly,
 }
 
+option EPR.EnableSpriteGenerators
+{
+    type = boolean,
+    default = false,
+    page = EPR,
+    translation = EPR_EnableSpriteGenerators,
+}
+
 
 option EPR.WaterTankRequiresPower
 {

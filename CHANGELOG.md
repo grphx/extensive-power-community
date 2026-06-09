@@ -22,6 +22,39 @@ authorship remains Hunter's; this list tracks only what the fork adds.
 
 ---
 
+## [0.4.1] - 2026-06-09 - Sprite-generator grid-power opt-in
+
+Workshop user reports flagged that "the entire KY power grid gets power
+the moment any building has EPR power" - the immovable industrial-site
+generator sprites (sprite IDs `industry_02_52`, `_53`, `_67`, `_71`)
+were being treated as alternate EPR power sources, so activating any
+of them flipped the global grid override and powered the whole map.
+
+The underlying issue is architectural: EPR's grid-restoration system
+operates on the GLOBAL `SandboxVars.ElecShutModifier` rather than per-
+building, and fixing that properly is a larger v0.5 effort (likely
+requires a Java-side override of `IsoObject.isPowered`). This v0.4.1
+ships the simpler workaround the bug-report community asked for:
+
+- **New sandbox option `EPR.EnableSpriteGenerators`** (page = EPR,
+  default = **off**). When OFF, the four hardcoded industrial-site
+  generator sprites have no effect on EPR's global grid override -
+  the only way to restore the grid is repairing Louisville Plant via
+  the substation chain, as originally intended.
+- When ON, behaviour matches v0.4.0 (any sprite generator restores
+  the whole grid). Toggle is exposed for server admins who prefer the
+  old behaviour.
+- **Vanilla portable generators are untouched.** This option only
+  controls EPR's sprite-source grid-override path. Vanilla portable
+  generators (the moveable item you find/craft, place down, and
+  connect to wires) continue to power buildings via wires exactly as
+  PZ ships them.
+
+Single change in `EPR_PowerController.IsAnySpriteGeneratorActive()`:
+returns `false` immediately when the option is off, short-circuiting
+the global-override trigger. Plus the option declaration in
+`sandbox-options.txt` and the Sandbox.json translation.
+
 ## [0.4.0] - 2026-05-29 - Water-shutoff bugfix + indestructible-after-repair option
 
 Bug fixes:
