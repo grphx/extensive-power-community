@@ -34,6 +34,11 @@ EPR.Client = {}
 -- Track if we've done initial sync
 EPR.Client.syncCompleted = false
 
+-- Build 42.19 can fire OnConnected/OnGameStart before the MP player is fully
+-- accepted by the server. Keep retrying the initial sync until FullSync arrives.
+EPR.Client.syncRetryRegistered = false
+EPR.Client.syncRetryTicks = 0
+
 -- ============================================
 -- MP DETECTION
 -- ============================================
@@ -273,6 +278,55 @@ function EPR.Client.RequestSync()
 end
 
 -- ============================================
+-- RELIABLE INITIAL MP SYNC (B42.19)
+-- ============================================
+
+function EPR.Client.StopSyncRetry()
+    if EPR.Client.syncRetryRegistered and Events and Events.OnTick then
+        Events.OnTick.Remove(EPR.Client.SyncRetryTick)
+    end
+
+    EPR.Client.syncRetryRegistered = false
+    EPR.Client.syncRetryTicks = 0
+end
+
+function EPR.Client.SyncRetryTick()
+    if EPR.Client.syncCompleted or not isClient() then
+        EPR.Client.StopSyncRetry()
+        return
+    end
+
+    -- Retry roughly every two seconds. The first attempt happens immediately.
+    EPR.Client.syncRetryTicks = (EPR.Client.syncRetryTicks or 0) + 1
+    if EPR.Client.syncRetryTicks < 120 then
+        return
+    end
+    EPR.Client.syncRetryTicks = 0
+
+    local player = getPlayer()
+    if not player then
+        return
+    end
+
+    sendClientCommand(player, "EPR", "RequestSync", {})
+    logDebug("[EPR Client] Sent RequestSync retry")
+end
+
+function EPR.Client.BeginSyncRetry()
+    if not isClient() or EPR.Client.syncCompleted then
+        return
+    end
+
+    if EPR.Client.syncRetryRegistered then
+        return
+    end
+
+    EPR.Client.syncRetryRegistered = true
+    EPR.Client.syncRetryTicks = 119
+    Events.OnTick.Add(EPR.Client.SyncRetryTick)
+end
+
+-- ============================================
 -- ADMIN COMMANDS
 -- ============================================
 
@@ -417,10 +471,16 @@ function EPR.Client.HandleFullSync(args)
 
     if args.ConnectedBuildings then
         EPR.ConnectedBuildings = args.ConnectedBuildings
+        if EPR.Buildings then
+            EPR.Buildings.Connected = EPR.ConnectedBuildings
+        end
     end
 
     if args.ConnectedStreetLights then
         EPR.ConnectedStreetLights = args.ConnectedStreetLights
+        if EPR.StreetLights then
+            EPR.StreetLights.Connected = EPR.ConnectedStreetLights
+        end
     end
 
     if args.SpriteGenerators then
@@ -437,6 +497,7 @@ function EPR.Client.HandleFullSync(args)
     end
 
     EPR.Client.syncCompleted = true
+    EPR.Client.StopSyncRetry()
     logDebug("[EPR Client] ====== Full sync complete ======")
 
     -- Update power controller state based on synced data
@@ -453,6 +514,19 @@ function EPR.Client.HandleFullSync(args)
     if EPR.Buildings and EPR.Buildings.OnLoaded then
         EPR.Buildings.OnLoaded()
     end
+
+    -- OnLoaded may rebuild its local table, so restore the server-authoritative
+    -- connected-building table afterward and apply the synced utility states.
+    if EPR.Buildings then
+        EPR.Buildings.Connected = EPR.ConnectedBuildings or {}
+        if EPR.Buildings.RebuildZoneCounts then
+            EPR.Buildings.RebuildZoneCounts()
+        end
+        if EPR.Buildings.ApplyAllZones then
+            EPR.Buildings.ApplyAllZones()
+        end
+    end
+
     if EPR.Buildings and EPR.Buildings.ApplyAllSpriteGenerators then
         EPR.Buildings.ApplyAllSpriteGenerators()
     end
@@ -709,18 +783,17 @@ end
 function EPR.Client.OnGameStart()
     logDebug("[EPR Client] Game started")
 
-    -- Request initial sync in MP
-    if EPR.Client.IsMultiplayer() then
-        -- Small delay to ensure server is ready
-        EPR.Client.RequestSync()
+    if isClient() then
+        EPR.Client.BeginSyncRetry()
     end
 end
 
 function EPR.Client.OnConnected()
     logDebug("[EPR Client] Connected to server")
 
-    -- Request sync on (re)connect
-    EPR.Client.RequestSync()
+    -- This event can fire before getPlayer() is usable in B42.19.
+    EPR.Client.syncCompleted = false
+    EPR.Client.BeginSyncRetry()
 end
 
 -- ============================================

@@ -1105,16 +1105,67 @@ function EPR.Buildings.IsBuildingConnected(buildingKey)
     return EPR.Buildings.Connected[buildingKey] ~= nil
 end
 
-function EPR.Buildings.IsSquareConnected(square)
-    if not square then return false end
-    if not EPR.Buildings.Connected then return false end
+-- Returns the server-authoritative connection key for the building containing
+-- this square. In multiplayer, IsoBuilding:getID() may differ between the
+-- server and clients, so matching only by building ID is not reliable.
+function EPR.Buildings.FindConnectedBuildingKey(square)
+    if not square or not EPR.Buildings.Connected then return nil end
+
+    local targetBuilding = square.getBuilding and square:getBuilding() or nil
+    local directKey = targetBuilding and getBuildingKey(targetBuilding, square) or nil
+    if directKey and EPR.Buildings.Connected[directKey] then
+        return directKey
+    end
+
+    local targetDef = targetBuilding and targetBuilding.getDef and targetBuilding:getDef() or nil
+    local targetBounds = nil
+    if targetDef and targetDef.getX and targetDef.getY and targetDef.getW and targetDef.getH then
+        targetBounds = tostring(targetDef:getX()) .. "," ..
+            tostring(targetDef:getY()) .. "," ..
+            tostring(targetDef:getW()) .. "," ..
+            tostring(targetDef:getH())
+    end
+
     local sx, sy, sz = square:getX(), square:getY(), square:getZ()
-    for _, record in pairs(EPR.Buildings.Connected) do
-        if record and record.x == sx and record.y == sy and record.z == sz then
-            return true
+
+    for storedKey, record in pairs(EPR.Buildings.Connected) do
+        if record then
+            -- Preserve the old exact-square fallback.
+            if record.x == sx and record.y == sy and record.z == sz then
+                return storedKey
+            end
+
+            -- Resolve the square used when the server created the record and
+            -- compare its local building object with the target building.
+            local recordSquare = getSquare(record.x, record.y, record.z or 0)
+            local recordBuilding = recordSquare and recordSquare.getBuilding and recordSquare:getBuilding() or nil
+
+            if targetBuilding and recordBuilding and recordBuilding == targetBuilding then
+                return storedKey
+            end
+
+            -- Building-object identity can also vary while chunks are loading.
+            -- Compare stable map bounds as a final fallback.
+            if targetBounds and recordBuilding and recordBuilding.getDef then
+                local recordDef = recordBuilding:getDef()
+                if recordDef and recordDef.getX and recordDef.getY and recordDef.getW and recordDef.getH then
+                    local recordBounds = tostring(recordDef:getX()) .. "," ..
+                        tostring(recordDef:getY()) .. "," ..
+                        tostring(recordDef:getW()) .. "," ..
+                        tostring(recordDef:getH())
+                    if recordBounds == targetBounds then
+                        return storedKey
+                    end
+                end
+            end
         end
     end
-    return false
+
+    return nil
+end
+
+function EPR.Buildings.IsSquareConnected(square)
+    return EPR.Buildings.FindConnectedBuildingKey(square) ~= nil
 end
 
 function EPR.Buildings.ConnectBuilding(building, square, zoneName)
