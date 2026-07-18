@@ -355,8 +355,23 @@ local function OnFillWorldObjectContextMenu(player, context, worldobjects, test)
                 end
 
                 if building and zoneName then
-                    local key = EPR.Buildings.GetBuildingKey and EPR.Buildings.GetBuildingKey(building, square) or nil
-                    local connected = key and EPR.Buildings.IsBuildingConnected and EPR.Buildings.IsBuildingConnected(key)
+                    -- In multiplayer, the server's building ID may differ from the
+                    -- client's local IsoBuilding ID. Prefer the whole-building
+                    -- connection lookup added in EPR_BuildingGrid.lua so the menu
+                    -- uses the server-authoritative stored key.
+                    local key = nil
+                    if EPR.Buildings.FindConnectedBuildingKey then
+                        key = EPR.Buildings.FindConnectedBuildingKey(square)
+                    end
+
+                    local connected = key ~= nil
+
+                    -- For an unconnected building, keep the local key available for
+                    -- display/fallback logic without treating it as connected.
+                    if not key and EPR.Buildings.GetBuildingKey then
+                        key = EPR.Buildings.GetBuildingKey(building, square)
+                    end
+
                     local canConnect, reason = EPR.Buildings.CanConnectZone and EPR.Buildings.CanConnectZone(zoneName)
                     local meetsSkill = EPR.Buildings.PlayerHasElectricalSkill and EPR.Buildings.PlayerHasElectricalSkill(playerObj, 3)
 
