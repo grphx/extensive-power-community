@@ -23,12 +23,6 @@ local function isAuthorized(player)
     return false
 end
 
-local function debugEnabled()
-    if EPR and EPR.IsDebugMode then return EPR.IsDebugMode() end
-    if SandboxVars and SandboxVars.EPR and SandboxVars.EPR.DebugMode then return true end
-    return false
-end
-
 local function send(command, args)
     if isClient() and sendClientCommand then
         sendClientCommand("EPR", command, args)

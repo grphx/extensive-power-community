@@ -572,7 +572,7 @@ local function OnFillWorldObjectContextMenu(player, context, worldobjects, test)
                     end
                 end
             else
-                local uiOption = genSub:addOption(
+                genSub:addOption(
                     getText("UI_EPR_SpriteGen_OpenUI") or "Open Generator UI",
                     playerObj,
                     EPR.ContextMenu.OnOpenSpriteGeneratorUI,

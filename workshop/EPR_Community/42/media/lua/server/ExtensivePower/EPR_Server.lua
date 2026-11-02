@@ -1103,19 +1103,6 @@ function EPR.Server.HandleToggleSpriteGenerator(player, args)
     sendSpriteGeneratorUpdate(record.key, record, false)
 end
 
-local function findPetrolItem(player)
-    if not player or not player.getInventory then return nil end
-    local inv = player:getInventory()
-    if not inv or not inv.getAllEvalRecurse then return nil end
-    local items = inv:getAllEvalRecurse(function(item)
-        local fc = item and item.getFluidContainer and item:getFluidContainer() or nil
-        if not fc or not fc.contains then return false end
-        return fc:contains(Fluid.Petrol) and fc:getAmount() > 0
-    end)
-    if not items or items:isEmpty() then return nil end
-    return items:get(0)
-end
-
 function EPR.Server.HandleSpriteGeneratorRefuel(player, args)
     if not args or not args.key then return end
     local record = EPR.SpriteGenerators and EPR.SpriteGenerators[args.key]

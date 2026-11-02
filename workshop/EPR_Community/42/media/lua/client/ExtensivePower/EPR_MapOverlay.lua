@@ -4,8 +4,8 @@
     The in-game map overlay has been removed: it rendered poorly and did not
     work reliably across B42 world-map API builds. This file is intentionally
     an inert stub so the mod keeps loading cleanly and the feature can be
-    reintroduced later without touching mod packaging or the
-    EPR.ShowMapOverlay sandbox option (which is now a no-op, default Off).
+    reintroduced later without touching mod packaging. (The former
+    EPR.ShowMapOverlay sandbox option has been removed.)
 
     To restore: re-implement EPR.MapOverlay.Draw and re-add the
     ISWorldMap.render hook here. Nothing else in the mod depends on this

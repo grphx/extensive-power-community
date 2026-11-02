@@ -131,14 +131,6 @@ option EPR.RandomBreakdownEnabled
     translation = EPR_RandomBreakdownEnabled,
 }
 
-option EPR.BreakdownWarningEnabled
-{
-    type = boolean,
-    default = true,
-    page = EPR,
-    translation = EPR_BreakdownWarningEnabled,
-}
-
 
 option EPR.ZombieAttractionEnabled
 {
@@ -236,14 +228,6 @@ option EPR.GeneratorFuelConsumption
     translation = EPR_GeneratorFuelConsumption,
 }
 
-option EPR.GeneratorAutoConnect
-{
-    type = boolean,
-    default = true,
-    page = EPR,
-    translation = EPR_GeneratorAutoConnect,
-}
-
 option EPR.SpriteGeneratorVirtualOnly
 {
     type = boolean,
@@ -260,22 +244,6 @@ option EPR.EnableSpriteGenerators
     translation = EPR_EnableSpriteGenerators,
 }
 
-
-option EPR.WaterTankRequiresPower
-{
-    type = boolean,
-    default = false,
-    page = EPR,
-    translation = EPR_WaterTankRequiresPower,
-}
-
-option EPR.ManualPumpEnabled
-{
-    type = boolean,
-    default = true,
-    page = EPR,
-    translation = EPR_ManualPumpEnabled,
-}
 
 
 option EPR.RequirePrerequisite
@@ -301,14 +269,6 @@ option EPR.DebugMode
     default = false,
     page = EPR,
     translation = EPR_DebugMode,
-}
-
-option EPR.ShowMapOverlay
-{
-    type = boolean,
-    default = false,
-    page = EPR,
-    translation = EPR_ShowMapOverlay,
 }
 
 option EPR.RequirePowerOff
