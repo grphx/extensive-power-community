@@ -57,14 +57,6 @@ local function send(command, args)
     end
 end
 
-local function sortedKeys(t)
-    local out = {}
-    if not t then return out end
-    for k, _ in pairs(t) do table.insert(out, k) end
-    table.sort(out, function(a, b) return tostring(a) < tostring(b) end)
-    return out
-end
-
 -- ============================================================
 -- Panel class
 -- ============================================================

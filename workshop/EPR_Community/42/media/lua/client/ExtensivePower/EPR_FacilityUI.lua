@@ -854,7 +854,6 @@ function EPR_FacilityPanelNew:renderQuickStats(x, y, width)
     -- Fuel (if applicable)
     if self.status.fuelLevel ~= nil then
         self:drawText("Fuel:", x, y, Colors.textDim.r, Colors.textDim.g, Colors.textDim.b, 0.8, UIFont.Small)
-        local fuelColor = self.status.fuelLevel > 50 and Colors.textSuccess or (self.status.fuelLevel > 20 and Colors.textWarning or Colors.textDanger)
         self:drawFuelGauge(x + 100, y, 100, 14, self.status.fuelLevel)
     end
 end
@@ -1353,8 +1352,6 @@ function EPR_FacilityPanelNew:renderInlineRequirements(x, y, width, compState)
 
     local currentStage = compState.currentStage or "Assessment"
     local stageDef = EPR.Repair and EPR.Repair.Stages and EPR.Repair.Stages[currentStage]
-    local playerInv = self.player and self.player:getInventory()
-
     local reqX = x
 
     -- Tools
@@ -1814,7 +1811,6 @@ function EPR_FacilityPanelNew:calculateTimeEstimate()
     if self.status.components then
         for _, compState in pairs(self.status.components) do
             if compState.status ~= "functional" and compState.status ~= "repaired" then
-                local stagesToGo = 0
                 local requiredStages = compState.requiredStages or {"Assessment", "PartReplacement", "Calibration"}
 
                 for _, stageName in ipairs(requiredStages) do

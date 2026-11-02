@@ -1643,7 +1643,6 @@ local function onLoadGridSquare(square)
     if not square then return end
 
     local building = square.getBuilding and square:getBuilding() or nil
-    local zoneName = EPR.Zones and EPR.Zones.GetZoneAt and EPR.Zones.GetZoneAt(square:getX(), square:getY()) or nil
     if building then
         local key = getBuildingKey(building, square)
         local record = key and EPR.Buildings.Connected[key]
@@ -1686,8 +1685,9 @@ local function onLoadGridSquare(square)
     end
 end
 
-if Events and Events.OnLoadGridSquare then
-    Events.OnLoadGridSquare.Add(onLoadGridSquare)
+-- B42 event name is "LoadGridsquare" (lowercase s); "OnLoadGridSquare" never fires.
+if Events and Events.LoadGridsquare then
+    Events.LoadGridsquare.Add(onLoadGridSquare)
 end
 
 local tickCounter = 0
